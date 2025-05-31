@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { LotModule } from './infraestructura/adapters/http/lot.module';
+import { LotModule } from './infraestructure/adapters/http/lot.module';
 
 @Module({
   imports: [LotModule],
