@@ -5,7 +5,7 @@ import { GetLotsUseCase } from '../use-cases/lots/get-lots.use-case';
 import { UpdateLotDto } from '../dtos/lots/update-lot.dto';
 import { UpdateLotUseCase } from '../use-cases/lots/update-lot.use-case';
 import { DeleteLotUseCase } from '../use-cases/lots/delete-lot.use-case';
-import { GetLotByIdUseCase } from '../use-cases/lots/get-lot-by-id,use-case';
+import { GetLotByIdUseCase } from '../use-cases/lots/get-lot-by-id.use-case';
 
 @Injectable()
 export class LotService {
@@ -31,19 +31,19 @@ export class LotService {
     return this.getLotsUseCase.execute();
   }
 
-  async getLotById(id: number): Promise<object> {
+  async getLotById(id: string): Promise<object> {
     this.logger.log('Fetching lot by id');
 
     return this.getLotByIdUseCase.execute(id);
   }
 
-  async updateLot(id: number, dto: UpdateLotDto): Promise<object> {
+  async updateLot(id: string, dto: UpdateLotDto): Promise<object> {
     this.logger.log('Executing update lot operation.');
 
     return this.updateLotUseCase.execute(id, dto);
   }
 
-  async deleteLot(id: number): Promise<void> {
+  async deleteLot(id: string): Promise<void> {
     this.logger.log('Executing delete lot operation.');
 
     return this.deleteLotUseCase.execute(id);

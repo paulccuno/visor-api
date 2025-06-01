@@ -4,7 +4,7 @@ import { IsBoolean, IsNumber, IsString } from 'class-validator';
 export class UpdateLotDto {
   @ApiProperty()
   @IsString()
-  lot: string;
+  lot: number;
 
   @ApiProperty()
   @IsBoolean()

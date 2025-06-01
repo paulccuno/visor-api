@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { LotModule } from './infraestructure/adapters/http/lot.module';
+import { LotModule } from './modules/lot.module';
+import { PrismaModule } from './infraestructure/persistence/prisma/prisma.module';
 
 @Module({
-  imports: [LotModule],
+  imports: [PrismaModule, LotModule],
   controllers: [],
   providers: [],
 })

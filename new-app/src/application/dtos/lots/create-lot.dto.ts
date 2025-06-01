@@ -4,7 +4,7 @@ import { IsNumber, IsString } from 'class-validator';
 export class CreateLotDto {
   @ApiProperty()
   @IsString()
-  lot: string;
+  lot: number;
 
   @ApiProperty()
   @IsNumber()

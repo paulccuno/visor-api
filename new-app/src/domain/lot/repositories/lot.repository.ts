@@ -1,11 +1,13 @@
+import { Lot } from '../entities/lot.entity';
+
 export abstract class ILotRepository {
-  abstract findById(id: number): Promise<object | null>;
+  abstract findById(id: string): Promise<Lot | null>;
 
-  abstract findAll(): Promise<object[]>;
+  abstract findAll(): Promise<Lot[]>;
 
-  abstract save(lot: object): Promise<object>;
+  abstract create(lot: Lot): Promise<Lot>;
 
-  abstract update(lot: object): Promise<object>;
+  abstract update(id: string, lot: Lot): Promise<Lot>;
 
-  abstract delete(id: number): Promise<void>;
+  abstract delete(id: string): Promise<void>;
 }

@@ -4,7 +4,7 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
+  ParseUUIDPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -24,7 +24,7 @@ export class LotController {
   }
 
   @Get(':id')
-  getLotById(@Param('id', ParseIntPipe) id: number) {
+  getLotById(@Param('id', ParseUUIDPipe) id: string) {
     return this.lotService.getLotById(id);
   }
 
@@ -34,12 +34,12 @@ export class LotController {
   }
 
   @Put(':id')
-  updateLot(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateLotDto) {
+  updateLot(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateLotDto) {
     return this.lotService.updateLot(id, dto);
   }
 
   @Delete(':id')
-  deleteLot(@Param('id', ParseIntPipe) id: number) {
+  deleteLot(@Param('id', ParseUUIDPipe) id: string) {
     return this.lotService.deleteLot(id);
   }
 }
