@@ -11,5 +11,19 @@ services:
     ports:
       - '5432:5432'
 
+  visor-api:
+    depends_on:
+      - visor-db
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/usr/src/app/src
+    command: ['npm', 'run', 'start:dev']
+    env_file:
+      - ./.env.development
+
 volumes:
   db_data:
