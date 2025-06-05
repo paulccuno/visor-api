@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { AppException } from '../exceptions/app.exception';
+import { Prisma } from '@prisma/client';
 
 export class AppExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(AppExceptionFilter.name);
@@ -17,11 +18,10 @@ export class AppExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
 
     let httpStatus: HttpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-    let message: string | string[] = 'Internal server error.'; // Mensaje para el cliente
+    let message: string | string[] = 'Internal server error.';
     let logStack: string | undefined;
-    let logMessageDetails: string; // Mensaje detallado para el log
+    let logMessageDetails: string;
 
-    // Función auxiliar para extraer el mensaje de HttpException (incluyendo arrays de validación)
     const getHttpExceptionMessage = (
       excResponse: string | object,
     ): string | string[] => {
@@ -40,8 +40,9 @@ export class AppExceptionFilter implements ExceptionFilter {
     if (exception instanceof AppException) {
       httpStatus = exception.httpStatus;
       message = exception.message;
-      logMessageDetails = `AppException (Para Cliente): ${exception.name} - ${exception.message} at ${request.url}`;
+      logMessageDetails = `AppException: ${exception.name} - ${exception.message} at ${request.url}`;
       logStack = exception.stack;
+
       this.logger.warn(logMessageDetails);
     } else if (exception instanceof HttpException) {
       httpStatus = exception.getStatus();
@@ -54,13 +55,45 @@ export class AppExceptionFilter implements ExceptionFilter {
       if (httpStatus === HttpStatus.INTERNAL_SERVER_ERROR)
         this.logger.error(logMessageDetails, logStack);
       else this.logger.warn(logMessageDetails);
+    } else if (exception instanceof Prisma.PrismaClientKnownRequestError) {
+      logMessageDetails = `DBEception: ${exception.name} - Code ${exception.code} - ${exception.message} at ${request.url}`;
+      logStack = exception.stack;
+
+      switch (exception.code) {
+        case 'P2002': {
+          httpStatus = HttpStatus.CONFLICT;
+
+          message =
+            exception.message.split('\n').pop()?.trim() ||
+            'Duplicate entry detected.';
+          break;
+        }
+        case 'P2025': {
+          httpStatus = HttpStatus.NOT_FOUND;
+
+          message =
+            exception.message.split('\n').pop()?.trim() || 'Record not found.';
+          break;
+        }
+        default: {
+          httpStatus = HttpStatus.BAD_REQUEST;
+          message =
+            exception.message.split('\n').pop()?.trim() ||
+            'Database error ocurred';
+          break;
+        }
+      }
+
+      this.logger.error(logMessageDetails, logStack);
     } else if (exception instanceof Error) {
       message = 'Internal server error.';
       logMessageDetails = `Unhandled Error: ${exception.name} - ${exception.message} at ${request.url}`;
       logStack = exception.stack;
+
       this.logger.error(logMessageDetails, logStack);
     } else {
       logMessageDetails = `Completely Unknown Error Type: ${JSON.stringify(exception)} at ${request.url}`;
+
       this.logger.error(logMessageDetails);
     }
 
