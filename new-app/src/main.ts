@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { EnvironmentConfig } from './infraestructure/config/environtment.config';
-import { PrismaService } from './infraestructure/persistence/prisma/prisma.service';
+import { PrismaService } from './infraestructure/database/prisma/prisma.service';
 import { AppExceptionFilter } from './infraestructure/common/filters/app-exception.filter';
 
 async function bootstrap() {

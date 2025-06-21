@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
-import { LotModule } from './modules/lot.module';
-import { PrismaModule } from './infraestructure/persistence/prisma/prisma.module';
-import { AuthModule } from './modules/auth.module';
+import { InterfaceModule } from './interface/interface.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, LotModule],
+  imports: [InterfaceModule],
   controllers: [],
   providers: [],
 })
