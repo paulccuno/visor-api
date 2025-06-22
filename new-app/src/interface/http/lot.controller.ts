@@ -7,8 +7,9 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateLotDto, UpdateLotDto } from 'src/application/dtos/lots';
 import {
   CreateLotUseCase,
@@ -17,8 +18,11 @@ import {
   GetLotsUseCase,
   UpdateLotUseCase,
 } from 'src/application/use-cases/lot';
+import { JwtAuthGuard } from 'src/infraestructure/auth/jwt-auth.guard';
 
 @ApiTags('Lots')
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @Controller('lots')
 export class LotController {
   constructor(

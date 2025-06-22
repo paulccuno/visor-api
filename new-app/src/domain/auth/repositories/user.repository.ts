@@ -7,6 +7,8 @@ export abstract class IUserRepository {
 
   abstract findByEmail(email: string): Promise<User | null>;
 
+  abstract findByUsernameOrEmail(user: string): Promise<User | null>;
+
   abstract findAll(): Promise<User[]>;
 
   abstract create(user: User): Promise<User>;

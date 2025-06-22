@@ -1,23 +1,23 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { SignInDto, SignUpDto } from 'src/application/dtos/auth';
-import { SignInUseCase, SignUpUseCase } from 'src/application/use-cases/auth';
+import { LoginUserDto, RegisterUserDto } from 'src/application/dtos/auth';
+import { LoginUserUseCase, RegisterUserUseCase } from 'src/application/use-cases/auth';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(
-    private readonly signUpUseCase: SignUpUseCase,
-    private readonly signInUseCase: SignInUseCase,
+    private readonly registerUseCase: RegisterUserUseCase,
+    private readonly loginUserUserCase: LoginUserUseCase,
   ) {}
 
-  @Post('/signup')
-  signUp(@Body() dto: SignUpDto) {
-    return this.signUpUseCase.execute(dto);
+  @Post('/register')
+  register(@Body() dto: RegisterUserDto) {
+    return this.registerUseCase.execute(dto);
   }
 
-  @Post('/signin')
-  signIn(@Body() dto: SignInDto) {
-    return this.signInUseCase.execute(dto);
+  @Post('/login')
+  login(@Body() dto: LoginUserDto) {
+    return this.loginUserUserCase.execute(dto);
   }
 }

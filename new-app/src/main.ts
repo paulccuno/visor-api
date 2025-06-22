@@ -29,6 +29,7 @@ async function bootstrap() {
       'API documentation for NestJS project with Hexagonal Architecture and DDD',
     )
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

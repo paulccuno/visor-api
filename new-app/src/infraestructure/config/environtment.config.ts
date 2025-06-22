@@ -15,15 +15,23 @@ interface IEnvironmentConfig {
   NODE_ENV: Environment;
   PORT: number;
   DATABASE_URL: string;
+
+  JWT_SECRET: string;
+  JWT_EXPIRATION: string;
+  JWT_REFRESH_EXPIRATION: string;
 }
 
-const validationSchemaConfig = Joi.object({
+const validationSchemaConfig = Joi.object<IEnvironmentConfig>({
   NODE_ENV: Joi.string()
     .valid(...Object.values(Environment))
     .required()
     .default(Environment.local),
   PORT: Joi.number().required(),
   DATABASE_URL: Joi.string().required(),
+
+  JWT_SECRET: Joi.string().required(),
+  JWT_EXPIRATION: Joi.string().required(),
+  JWT_REFRESH_EXPIRATION: Joi.string().required(),
 }).unknown(true);
 
 const { error, value } = validationSchemaConfig.validate(process.env, {

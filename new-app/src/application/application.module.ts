@@ -1,5 +1,5 @@
 import { Module, Provider } from '@nestjs/common';
-import { SignInUseCase, SignUpUseCase } from './use-cases/auth';
+import { LoginUserUseCase, RegisterUserUseCase } from './use-cases/auth';
 import {
   CreateLotUseCase,
   DeleteLotUseCase,
@@ -11,8 +11,8 @@ import { InfraestructureModule } from 'src/infraestructure/infraestructure.modul
 
 const providers: Provider[] = [
   // Auth
-  SignUpUseCase,
-  SignInUseCase,
+  RegisterUserUseCase,
+  LoginUserUseCase,
 
   // Lot
   CreateLotUseCase,

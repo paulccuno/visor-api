@@ -7,7 +7,7 @@ import {
   IsUUID,
 } from 'class-validator';
 
-export class SignUpDto {
+export class RegisterUserDto {
   @ApiProperty()
   @IsUUID()
   @IsOptional()

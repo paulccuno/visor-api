@@ -31,6 +31,16 @@ export class PrismaUserRepository implements IUserRepository {
     return prismaUser ? User.fromPersistence(prismaUser) : null;
   }
 
+  async findByUsernameOrEmail(user: string): Promise<User | null> {
+    const prismaUser = await this.prisma.user.findFirst({
+      where: {
+        OR: [{ user_name: user }, { email: user }],
+      },
+    });
+
+    return prismaUser ? User.fromPersistence(prismaUser) : null;
+  }
+
   async findAll(): Promise<User[]> {
     const prismaUserse = await this.prisma.user.findMany();
 
