@@ -25,7 +25,7 @@ export class LoginUserUseCase {
     const payload: JwtPayload = {
       sub: user.id,
       name: user.name,
-      username: user.userName,
+      username: user.username,
       email: user.email,
     };
 

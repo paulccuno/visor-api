@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreateLotDto, UpdateLotDto } from 'src/application/dtos/lots';
+import { CreateLotDto, UpdateLotDto } from 'src/application/dtos/lot';
 import {
   CreateLotUseCase,
   DeleteLotUseCase,

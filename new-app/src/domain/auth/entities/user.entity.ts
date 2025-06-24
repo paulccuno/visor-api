@@ -2,34 +2,34 @@ import { Expose, instanceToPlain, plainToInstance } from 'class-transformer';
 import { User as PrismaUser } from '@prisma/client';
 
 export class User {
-  @Expose({ name: 'id' })
+  @Expose()
   id: string;
 
-  @Expose({ name: 'name' })
+  @Expose()
   name: string;
 
-  @Expose({ name: 'email' })
+  @Expose()
   email: string;
 
-  @Expose({ name: 'username' })
-  userName: string;
+  @Expose()
+  username: string;
 
-  @Expose({ name: 'password' })
+  @Expose()
   password: string;
 
-  @Expose({ name: 'created_by' })
+  @Expose()
   createdBy: string;
 
-  @Expose({ name: 'updated_by' })
+  @Expose()
   updatedBy?: string;
 
-  @Expose({ name: 'created_at' })
+  @Expose()
   createdAt: Date;
 
-  @Expose({ name: 'updated_at' })
+  @Expose()
   updatedAt?: Date;
 
-  @Expose({ name: 'record_status' })
+  @Expose()
   recordStatus: boolean;
 
   constructor(props: Partial<User>) {

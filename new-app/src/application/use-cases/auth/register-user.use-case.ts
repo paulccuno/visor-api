@@ -14,7 +14,7 @@ export class RegisterUserUseCase {
     const newUser = new User({
       ...dto,
       password: hashedPassword,
-      createdBy: dto.userName,
+      createdBy: dto.username,
     });
 
     const userCreated = await this.userRepository.create(newUser);

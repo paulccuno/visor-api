@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UpdateLotDto } from 'src/application/dtos/lots/update-lot.dto';
+import { UpdateLotDto } from 'src/application/dtos/lot/update-lot.dto';
 import { Lot } from 'src/domain/lot/entities/lot.entity';
 import { ILotRepository } from 'src/domain/lot/repositories/lot.repository';
 import { AppException } from 'src/infraestructure/common/exceptions/app.exception';

@@ -2,43 +2,43 @@ import { Expose, instanceToPlain, plainToInstance } from 'class-transformer';
 import { Lot as PrismaLot } from '@prisma/client';
 
 export class Lot {
-  @Expose({ name: 'id' })
+  @Expose()
   public readonly id: string;
 
-  @Expose({ name: 'block' })
+  @Expose()
   public block: string;
 
-  @Expose({ name: 'lot' })
+  @Expose()
   public lot: number;
 
-  @Expose({ name: 'area' })
+  @Expose()
   public area: number;
 
-  @Expose({ name: 'price_x_m2' })
+  @Expose()
   public pricePerm2: number;
 
-  @Expose({ name: 'total_price' })
+  @Expose()
   public totalPrice: number;
 
-  @Expose({ name: 'availability_status_id' })
+  @Expose()
   public availabilityStatusId: number;
 
-  @Expose({ name: 'price_visibility' })
+  @Expose()
   public priceVisibility: boolean;
 
-  @Expose({ name: 'created_by' })
+  @Expose()
   public createdBy: string;
 
-  @Expose({ name: 'updated_by' })
+  @Expose()
   public updatedBy?: string;
 
-  @Expose({ name: 'created_at' })
+  @Expose()
   public createdAt: Date;
 
-  @Expose({ name: 'updated_at' })
+  @Expose()
   public updatedAt?: Date;
 
-  @Expose({ name: 'record_status' })
+  @Expose()
   public recordStatus: boolean;
 
   constructor(props: Partial<Lot>) {
