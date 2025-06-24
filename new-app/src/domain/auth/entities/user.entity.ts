@@ -11,7 +11,7 @@ export class User {
   @Expose({ name: 'email' })
   email: string;
 
-  @Expose({ name: 'user_name' })
+  @Expose({ name: 'username' })
   userName: string;
 
   @Expose({ name: 'password' })

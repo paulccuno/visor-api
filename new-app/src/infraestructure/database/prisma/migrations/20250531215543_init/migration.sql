@@ -22,7 +22,7 @@ CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "user_name" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "created_by" VARCHAR(50) NOT NULL,
     "updated_by" VARCHAR(50),
@@ -56,7 +56,7 @@ CREATE INDEX "Lot_block_lot_idx" ON "Lot"("block", "lot");
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_user_name_key" ON "User"("user_name");
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- AddForeignKey
 ALTER TABLE "Lot" ADD CONSTRAINT "Lot_availability_status_id_fkey" FOREIGN KEY ("availability_status_id") REFERENCES "MasterTable"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

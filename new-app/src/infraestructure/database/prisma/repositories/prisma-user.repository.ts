@@ -17,7 +17,7 @@ export class PrismaUserRepository implements IUserRepository {
 
   async findByUsername(username: string): Promise<User | null> {
     const prismaUser = await this.prisma.user.findUnique({
-      where: { user_name: username },
+      where: { username: username },
     });
 
     return prismaUser ? User.fromPersistence(prismaUser) : null;
@@ -34,7 +34,7 @@ export class PrismaUserRepository implements IUserRepository {
   async findByUsernameOrEmail(user: string): Promise<User | null> {
     const prismaUser = await this.prisma.user.findFirst({
       where: {
-        OR: [{ user_name: user }, { email: user }],
+        OR: [{ username: user }, { email: user }],
       },
     });
 
